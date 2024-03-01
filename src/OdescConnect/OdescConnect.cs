@@ -1,37 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
 using System.Management;
 
-namespace FsConnect.ExampleConsole
+using FsConnect;
+using FsConnect.Events;
+
+namespace OdescConnect
 {
-    internal class OdescConnector
+    public class OdescConnect
     {
+        public event EventHandler<FsDataReceivedEventArgs> FsDataReceived;
+
         private SerialPort serialPort;
 
 
-        public OdescConnector()
+        public OdescConnect()
         {
             serialPort = new SerialPort("COM7", 19200, Parity.None, 8, StopBits.One);
 
             InitializeConnection();
         }
 
-        private void GetSerialPort()
-        {
-            var ports = SerialPort.GetPortNames();
-            GetOdrivePort();
-
-            foreach (var port in ports)
-            {
-                Console.WriteLine(port);
-            }
-        }
-
-        public void InitializeConnection()
+        private void InitializeConnection()
         {
             serialPort.Open();
+        }
+
+        public void HandleReceivedFsData(object sender, FsDataReceivedEventArgs e)
+        {
+            if (e.Data == null || e.Data.Count == 0) return;
+
+            if (e.RequestId == (uint)Requests.PlaneInfoRequest)
+            {
+                var response = (PlaneInfoResponse)e.Data.FirstOrDefault();
+
+                this.SendMotorControlInfo(response.IndicatedAirspeed);
+            }
         }
 
         public double GetElevatorAxisPosition()
@@ -47,7 +52,7 @@ namespace FsConnect.ExampleConsole
             return elevatorPosition;
         }
 
-        public void SendPositionData(double position)
+        public void SendMotorControlInfo(double position)
         {
             Console.WriteLine($"Going to position {position}");
 
@@ -74,6 +79,5 @@ namespace FsConnect.ExampleConsole
                 }
             }
         }
-
     }
 }

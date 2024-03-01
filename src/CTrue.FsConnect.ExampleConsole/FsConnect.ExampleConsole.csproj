@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CTrue.FsConnect\FsConnect.csproj" />
+    <ProjectReference Include="..\OdescConnect\OdescConnect.csproj" />
   </ItemGroup>
 
   <ItemGroup>

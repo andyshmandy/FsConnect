@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{FAD9C7D7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FsConnect.FsEnumGenerator", "tools\CTrue.FsConnect.FsEnumGenerator\FsConnect.FsEnumGenerator.csproj", "{F13D4437-D58A-4743-AE66-902BB6119F23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OdescConnect", "OdescConnect\OdescConnect.csproj", "{5120DFB8-C2A3-4FE9-A2E8-41655695BFBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,18 @@ Global
 		{F13D4437-D58A-4743-AE66-902BB6119F23}.Release|x64.Build.0 = Release|Any CPU
 		{F13D4437-D58A-4743-AE66-902BB6119F23}.Release|x86.ActiveCfg = Release|Any CPU
 		{F13D4437-D58A-4743-AE66-902BB6119F23}.Release|x86.Build.0 = Release|Any CPU
+		{5120DFB8-C2A3-4FE9-A2E8-41655695BFBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5120DFB8-C2A3-4FE9-A2E8-41655695BFBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5120DFB8-C2A3-4FE9-A2E8-41655695BFBD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5120DFB8-C2A3-4FE9-A2E8-41655695BFBD}.Debug|x64.Build.0 = Debug|Any CPU
+		{5120DFB8-C2A3-4FE9-A2E8-41655695BFBD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5120DFB8-C2A3-4FE9-A2E8-41655695BFBD}.Debug|x86.Build.0 = Debug|Any CPU
+		{5120DFB8-C2A3-4FE9-A2E8-41655695BFBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5120DFB8-C2A3-4FE9-A2E8-41655695BFBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5120DFB8-C2A3-4FE9-A2E8-41655695BFBD}.Release|x64.ActiveCfg = Release|Any CPU
+		{5120DFB8-C2A3-4FE9-A2E8-41655695BFBD}.Release|x64.Build.0 = Release|Any CPU
+		{5120DFB8-C2A3-4FE9-A2E8-41655695BFBD}.Release|x86.ActiveCfg = Release|Any CPU
+		{5120DFB8-C2A3-4FE9-A2E8-41655695BFBD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
