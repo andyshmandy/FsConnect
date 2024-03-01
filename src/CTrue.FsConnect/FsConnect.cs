@@ -5,15 +5,19 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
+
+using FsConnect.Events;
+
 using Microsoft.FlightSimulator.SimConnect;
+
 using Serilog;
 
-namespace CTrue.FsConnect
+namespace FsConnect
 {
     /// <inheritdoc />
     public class FsConnect : IFsConnect
     {
-        
+
         private SimConnect _simConnect = null;
 
         private EventWaitHandle _simConnectEventHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
@@ -81,7 +85,7 @@ namespace CTrue.FsConnect
                 if (_connectionInfo.Connected != value)
                 {
                     _connectionInfo.Connected = value;
-                    
+
                     ConnectionChanged?.Invoke(this, value);
                 }
             }
@@ -211,7 +215,7 @@ namespace CTrue.FsConnect
         /// <inheritdoc />
         public int RegisterDataDefinition<T>(int id, List<SimVar> definition) where T : struct
         {
-            return RegisterDataDefinition<T>((FsConnectEnum) id, definition);
+            return RegisterDataDefinition<T>((FsConnectEnum)id, definition);
         }
 
         /// <inheritdoc />
@@ -264,7 +268,7 @@ namespace CTrue.FsConnect
         /// <inheritdoc />
         public void RequestData(Enum requestId, Enum defineId, uint radius = 0, FsConnectSimobjectType type = FsConnectSimobjectType.User)
         {
-            _simConnect?.RequestDataOnSimObjectType( requestId, defineId, radius, (SIMCONNECT_SIMOBJECT_TYPE)type);
+            _simConnect?.RequestDataOnSimObjectType(requestId, defineId, radius, (SIMCONNECT_SIMOBJECT_TYPE)type);
         }
 
         /// <inheritdoc />
@@ -332,7 +336,7 @@ namespace CTrue.FsConnect
         /// <inheritdoc />
         public void SetNotificationGroupPriority(int groupId)
         {
-            SetNotificationGroupPriority((FsConnectEnum) groupId);
+            SetNotificationGroupPriority((FsConnectEnum)groupId);
         }
 
         /// <inheritdoc />
@@ -362,7 +366,7 @@ namespace CTrue.FsConnect
         /// <inheritdoc />
         public void Pause(bool pause)
         {
-            _simConnect.TransmitClientEvent(0, SimEvents.PauseSet, pause ? (uint)1 : (uint)0, GROUP_IDS.GROUP_1, SIMCONNECT_EVENT_FLAG.GROUPID_IS_PRIORITY);
+            _simConnect.TransmitClientEvent(0, SimEvents.PauseSet, pause ? 1 : (uint)0, GROUP_IDS.GROUP_1, SIMCONNECT_EVENT_FLAG.GROUPID_IS_PRIORITY);
             _paused = true;
         }
 

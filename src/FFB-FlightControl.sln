@@ -3,20 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrue.FsConnect", "CTrue.FsConnect\CTrue.FsConnect.csproj", "{D507C538-CA5D-4162-93D2-C3C560F6648E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FsConnect", "CTrue.FsConnect\FsConnect.csproj", "{D507C538-CA5D-4162-93D2-C3C560F6648E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{12C96830-77DE-4270-9FAF-56D356FA045C}"
 	ProjectSection(SolutionItems) = preProject
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrue.FsConnect.ExampleConsole", "CTrue.FsConnect.ExampleConsole\CTrue.FsConnect.ExampleConsole.csproj", "{EF83E27B-B413-4FEC-A49B-2F8E5B4CA213}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FsConnect.ExampleConsole", "CTrue.FsConnect.ExampleConsole\FsConnect.ExampleConsole.csproj", "{EF83E27B-B413-4FEC-A49B-2F8E5B4CA213}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrue.FsConnect.Test", "CTrue.FsConnect.Test\CTrue.FsConnect.Test.csproj", "{0DB161A6-82E6-4C8C-BB2E-71B87E367756}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FsConnect.Test", "CTrue.FsConnect.Test\FsConnect.Test.csproj", "{0DB161A6-82E6-4C8C-BB2E-71B87E367756}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{FAD9C7D7-63A6-482F-A9A9-3AFBCE2591C3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTrue.FsConnect.FsEnumGenerator", "tools\CTrue.FsConnect.FsEnumGenerator\CTrue.FsConnect.FsEnumGenerator.csproj", "{F13D4437-D58A-4743-AE66-902BB6119F23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FsConnect.FsEnumGenerator", "tools\CTrue.FsConnect.FsEnumGenerator\FsConnect.FsEnumGenerator.csproj", "{F13D4437-D58A-4743-AE66-902BB6119F23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

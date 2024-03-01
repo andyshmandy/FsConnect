@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
-using CTrue.FsConnect;
+
 using FFB_SimConnect;
+
+using FsConnect;
+using FsConnect.Events;
+
 using Microsoft.FlightSimulator.SimConnect;
 
-namespace FsConnectTest
+namespace FsConnect.ExampleConsole
 {
     public enum Requests
     {
@@ -47,10 +51,10 @@ namespace FsConnectTest
     public class FsConnectTestConsole
     {
         public double airSpeed;
-        public FsConnectTestConsole() 
+        public FsConnectTestConsole()
         {
-            this.airSpeed = 0;
-        }   
+            airSpeed = 0;
+        }
 
         public static void Main(string[] args)
         {
@@ -58,7 +62,7 @@ namespace FsConnectTest
             uint port = 500;
 
             // Also supports "somehostname 1234"
-            if(args.Length == 2)
+            if (args.Length == 2)
             {
                 hostName = args[0];
                 port = uint.Parse(args[1]);
@@ -86,10 +90,10 @@ namespace FsConnectTest
             var odConnector = new OdescConnector();
             ConsoleKeyInfo cki;
 
-            while(true)
+            while (true)
             {
-                fsConnect.RequestData((int)Requests.PlaneInfoRequest, planeInfoDefinitionId);;
-                
+                fsConnect.RequestData((int)Requests.PlaneInfoRequest, planeInfoDefinitionId); ;
+
                 odConnector.SendPositionData(.1);
                 double elevatorPosition = odConnector.GetElevatorAxisPosition();
                 fsConnect.UpdateData(elevatorDefId, elevatorPosition * -100000);
@@ -106,7 +110,7 @@ namespace FsConnectTest
 
             if (e.RequestId == (uint)Requests.PlaneInfoRequest)
             {
-                
+
 
                 PlaneInfoResponse r = (PlaneInfoResponse)e.Data.FirstOrDefault();
                 Console.WriteLine($"IndicatedAirspeed: {r.IndicatedAirspeed} ElevatorDeflection: {r.ElevatorDeflection} ElevatorPosition: {r.ElevatorPosition}");

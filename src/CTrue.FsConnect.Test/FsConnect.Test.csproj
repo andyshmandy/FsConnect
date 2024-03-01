@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CTrue.FsConnect\CTrue.FsConnect.csproj" />
+    <ProjectReference Include="..\CTrue.FsConnect\FsConnect.csproj" />
   </ItemGroup>
 
   <ItemGroup>

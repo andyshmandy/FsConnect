@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+
+using FsConnect.Events;
+
 using Microsoft.FlightSimulator.SimConnect;
 
-namespace CTrue.FsConnect
+namespace FsConnect
 {
     /// <summary>
     /// A wrapper / helper class for connection to Microsoft Flight Simulator.
@@ -99,7 +102,7 @@ namespace CTrue.FsConnect
         /// Flight Simulator must be configured for remote connections by editing the SimConnect.xml file that are part of the installation.
         /// </remarks>
         void Connect(string applicationName, string hostName, uint port, SimConnectProtocol protocol);
-        
+
         /// <summary>
         /// Disconnects from Flight Simulator.
         /// </summary>
