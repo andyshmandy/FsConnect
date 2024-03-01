@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CTrue.FsConnect
+namespace FsConnect
 {
     /// <summary>
     /// Describes how often data should be returned.

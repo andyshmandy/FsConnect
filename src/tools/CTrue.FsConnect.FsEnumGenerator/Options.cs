@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace CTrue.FsConnect.FsEnumGenerator
+namespace FsEnumGenerator
 {
     public class Options
     {

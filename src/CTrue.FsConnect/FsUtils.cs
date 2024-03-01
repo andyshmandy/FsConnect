@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CTrue.FsConnect
+namespace FsConnect
 {
     /// <summary>
     /// Utilities for handling Flight Simulator

@@ -1,7 +1,10 @@
 ﻿using System;
+
+using FsConnect;
+
 using NUnit.Framework;
 
-namespace CTrue.FsConnect.Test
+namespace FsConnect.Test
 {
     [TestFixture]
     public class BcdTests
@@ -17,10 +20,10 @@ namespace CTrue.FsConnect.Test
              */
             double freq = 128.775;
             uint freq1 = (uint)(freq * 100);
-            double remainder = ((freq * 100) - freq1) / 100.0;
+            double remainder = (freq * 100 - freq1) / 100.0;
             var bcd = Bcd.Dec2Bcd(freq1);
             var freq2 = Bcd.Bcd2Dec(bcd);
-            
+
 
             Assert.That(freq2, Is.EqualTo(freq1));
 
@@ -39,7 +42,7 @@ namespace CTrue.FsConnect.Test
             // Assert
             var freqOutUint = Bcd.Bcd2Dec(bcd);
             var freqOutDouble = (double)freqOutUint / 100;
-            
+
             Assert.That(freqOutDouble, Is.EqualTo(freq));
         }
     }

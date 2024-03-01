@@ -1,4 +1,4 @@
-﻿namespace CTrue.FsConnect
+﻿namespace FsConnect
 {
     /// <summary>
     /// The <see cref="FsConnectEnum"/> is a dummy enum used when identifying definitions, events and other SimConnect artifacts that needs to be identified.

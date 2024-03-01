@@ -2,9 +2,13 @@
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
+
+using FsConnect;
+
 using Microsoft.FlightSimulator.SimConnect;
+
 using NUnit.Framework;
-namespace CTrue.FsConnect.Test
+namespace FsConnect.Test
 {
     [TestFixture, Explicit]
     public class FsConnectIntegrationTest
@@ -22,19 +26,19 @@ namespace CTrue.FsConnect.Test
             // Arrange
             AutoResetEvent resetEvent = new AutoResetEvent(false);
             int errorCount = 0;
-            
+
             FsConnect fsConnect = new FsConnect();
             fsConnect.ConnectionChanged += (sender, b) =>
             {
                 if (b) resetEvent.Set();
             };
-            
+
             fsConnect.FsError += (sender, args) =>
             {
                 errorCount++;
                 Console.WriteLine($"Error: {args.ExceptionDescription}");
             };
-            
+
             fsConnect.Connect("FsConnectIntegrationTest", 0);
             bool res = resetEvent.WaitOne(2000);
             if (!res) Assert.Fail("Not connected to MSFS within timeout");
@@ -46,8 +50,8 @@ namespace CTrue.FsConnect.Test
             fsConnect.MapClientEventToSimEvent(TestEnums.GroupId, TestEnums.EventId, FsEventNameId.HeadingBugSet);
             fsConnect.SetNotificationGroupPriority(TestEnums.GroupId);
             uint headingValue = (uint)DateTime.Now.Second * 6;
-            fsConnect.TransmitClientEvent(TestEnums.EventId, (uint)headingValue, TestEnums.GroupId);
-            
+            fsConnect.TransmitClientEvent(TestEnums.EventId, headingValue, TestEnums.GroupId);
+
             // Assert
             Assert.That(errorCount, Is.Zero, "MSFS returned errors. Check console output.");
 
@@ -55,7 +59,7 @@ namespace CTrue.FsConnect.Test
             {
                 var data = args.Data.FirstOrDefault();
 
-                headingBugData = data is HeadingBugTest ? (HeadingBugTest) data : default;
+                headingBugData = data is HeadingBugTest ? (HeadingBugTest)data : default;
 
                 resetEvent.Set();
             };

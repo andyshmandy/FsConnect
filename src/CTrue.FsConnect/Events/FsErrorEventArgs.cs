@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CTrue.FsConnect
+namespace FsConnect.Events
 {
     /// <summary>
     /// Describes information about an error reported by SimConnect.

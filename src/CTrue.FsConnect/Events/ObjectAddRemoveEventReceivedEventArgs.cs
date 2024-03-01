@@ -1,7 +1,8 @@
 ﻿using System;
+
 using Microsoft.FlightSimulator.SimConnect;
 
-namespace CTrue.FsConnect
+namespace FsConnect.Events
 {
     /// <summary>
     /// Used to hold data received from Flight Simulator.

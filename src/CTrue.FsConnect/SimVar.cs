@@ -1,6 +1,6 @@
 ﻿using Microsoft.FlightSimulator.SimConnect;
 
-namespace CTrue.FsConnect
+namespace FsConnect
 {
     /// <summary>
     /// Represents a simulation variable, used to define a data definition.

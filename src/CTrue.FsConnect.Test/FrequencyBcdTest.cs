@@ -1,6 +1,8 @@
-﻿using NUnit.Framework;
+﻿using FsConnect;
 
-namespace CTrue.FsConnect.Test
+using NUnit.Framework;
+
+namespace FsConnect.Test
 {
     [TestFixture]
     public class FrequencyBcdTest

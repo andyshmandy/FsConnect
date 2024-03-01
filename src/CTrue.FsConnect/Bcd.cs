@@ -1,4 +1,4 @@
-﻿namespace CTrue.FsConnect
+﻿namespace FsConnect
 {
     /// <summary>
     /// Handles the BCD format
@@ -27,18 +27,18 @@
 
         public static uint Dec2Bcd(double num)
         {
-            return Dec2Bcd((uint) (num * 100));
+            return Dec2Bcd((uint)(num * 100));
         }
 
         private static uint HornerScheme(uint Num, uint Divider, uint Factor)
         {
             uint Remainder = 0, Quotient = 0, Result = 0;
-            Remainder = Num % Divider; 
+            Remainder = Num % Divider;
             Quotient = Num / Divider;
 
             if (!(Quotient == 0 && Remainder == 0))
-                Result += HornerScheme(Quotient, Divider, Factor) * Factor + Remainder; 
-            
+                Result += HornerScheme(Quotient, Divider, Factor) * Factor + Remainder;
+
             return Result;
         }
     }

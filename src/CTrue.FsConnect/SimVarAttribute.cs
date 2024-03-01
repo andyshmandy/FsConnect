@@ -1,7 +1,8 @@
 ﻿using System;
+
 using Microsoft.FlightSimulator.SimConnect;
 
-namespace CTrue.FsConnect
+namespace FsConnect
 {
     /// <summary>
     /// The <see cref="SimVarAttribute"/> decorates a field in a SimVar structure so that the correct data definition can be generated automatically.

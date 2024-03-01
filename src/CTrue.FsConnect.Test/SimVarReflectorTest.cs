@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+
+using FsConnect;
+
 using Microsoft.FlightSimulator.SimConnect;
+
 using NUnit.Framework;
 
-namespace CTrue.FsConnect.Test
+namespace FsConnect.Test
 {
     [TestFixture]
     public class SimVarReflectorTest
@@ -47,7 +51,7 @@ namespace CTrue.FsConnect.Test
             Assert.That(list[6].Name, Is.EqualTo("PLANE ALT ABOVE GROUND"));
             Assert.That(list[6].Unit, Is.EqualTo("meter"));
             Assert.That(list[6].DataType, Is.EqualTo(SIMCONNECT_DATATYPE.FLOAT32));
-            
+
             Assert.That(list[7].Name, Is.EqualTo("GENERAL ENG STARTER:1"));
             Assert.That(list[7].Unit, Is.EqualTo("Bool"));
             Assert.That(list[7].DataType, Is.EqualTo(SIMCONNECT_DATATYPE.INT32));
@@ -94,7 +98,7 @@ namespace CTrue.FsConnect.Test
         // #6
         [SimVar(UnitId = FsUnit.Meter)]
         public float PlaneAltAboveGround;
-        
+
         // #7
         [SimVar(UnitId = FsUnit.Bool)]
         public bool GeneralEngStarter1;

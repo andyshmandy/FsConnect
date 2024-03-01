@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CTrue.FsConnect
+namespace FsConnect
 {
     /// <summary>
     /// Contains key information about the connection to Flight Simulator.

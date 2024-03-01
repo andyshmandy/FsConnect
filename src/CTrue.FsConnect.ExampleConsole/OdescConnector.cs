@@ -4,7 +4,7 @@ using System.IO.Ports;
 using System.Linq;
 using System.Management;
 
-namespace FFB_SimConnect
+namespace FsConnect.ExampleConsole
 {
     internal class OdescConnector
     {
@@ -13,9 +13,9 @@ namespace FFB_SimConnect
 
         public OdescConnector()
         {
-            this.serialPort = new SerialPort("COM7", 19200, Parity.None, 8, StopBits.One);
+            serialPort = new SerialPort("COM7", 19200, Parity.None, 8, StopBits.One);
 
-            this.InitializeConnection();
+            InitializeConnection();
         }
 
         private void GetSerialPort()
@@ -31,13 +31,13 @@ namespace FFB_SimConnect
 
         public void InitializeConnection()
         {
-            this.serialPort.Open();
+            serialPort.Open();
         }
 
         public double GetElevatorAxisPosition()
         {
-            this.serialPort.WriteLine("f 0");
-            string response = this.serialPort.ReadLine().Trim();
+            serialPort.WriteLine("f 0");
+            string response = serialPort.ReadLine().Trim();
 
             string position = response.Split(' ').First();
 
@@ -56,7 +56,7 @@ namespace FFB_SimConnect
             //string torque = "7";
             //this.serialPort.WriteLine($"p {motor} {position} {speed} {torque}");
 
-            this.serialPort.WriteLine($"q 0 0 0 {position}");
+            serialPort.WriteLine($"q 0 0 0 {position}");
         }
 
         public static void GetOdrivePort()

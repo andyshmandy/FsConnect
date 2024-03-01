@@ -1,4 +1,4 @@
-﻿namespace CTrue.FsConnect
+﻿namespace FsConnect
 {
     public enum FsSystemEvent
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CTrue.FsConnect
+namespace FsConnect
 {
     public class FrequencyBcd
     {
@@ -25,11 +25,11 @@ namespace CTrue.FsConnect
             _value = freqValue;
 
             uint encodable = (uint)((_value - 100) * 100);
-            double remainder = ((_value * 100) - encodable) / 100.0;
+            double remainder = (_value * 100 - encodable) / 100.0;
 
             _bcd16Value = Bcd.Dec2Bcd(encodable);
 
-            Byte[] bytes = BitConverter.GetBytes(Convert.ToInt32(freqValue * 1000000));
+            byte[] bytes = BitConverter.GetBytes(Convert.ToInt32(freqValue * 1000000));
             _bcd32Value = BitConverter.ToUInt32(bytes, 0);
         }
 

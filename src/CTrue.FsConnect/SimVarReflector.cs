@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+
 using Microsoft.FlightSimulator.SimConnect;
 
-namespace CTrue.FsConnect
+namespace FsConnect
 {
     /// <summary>
     /// The <see cref="SimVarReflector"/> analyzes a type and determines a SimVar definition based on types, property names and the use of the <see cref="SimVarAttribute"/>.
@@ -87,7 +88,7 @@ namespace CTrue.FsConnect
             if (simVarName != null)
                 name = simVarName;
 
-            if(instance > 0)
+            if (instance > 0)
                 name = $"{name}:{instance}";
 
             return name;
@@ -99,12 +100,12 @@ namespace CTrue.FsConnect
             {
                 return FsUnitFactory.GetUnitName(attr.UnitId);
             }
-            
+
             if (!string.IsNullOrEmpty(attr?.Unit))
             {
                 return attr.Unit;
             }
-            
+
             return "";
         }
 
@@ -119,12 +120,12 @@ namespace CTrue.FsConnect
             if (field.FieldType == typeof(string))
             {
                 MarshalAsAttribute marshallAsAttr = field.GetCustomAttribute<MarshalAsAttribute>();
-                
-                if(marshallAsAttr != null)
+
+                if (marshallAsAttr != null)
                 {
                     int stringSize = marshallAsAttr.SizeConst;
 
-                    if(stringSize == 8)
+                    if (stringSize == 8)
                         return SIMCONNECT_DATATYPE.STRING8;
                     if (stringSize == 32)
                         return SIMCONNECT_DATATYPE.STRING32;
@@ -132,7 +133,7 @@ namespace CTrue.FsConnect
                         return SIMCONNECT_DATATYPE.STRING64;
                     if (stringSize == 128)
                         return SIMCONNECT_DATATYPE.STRING128;
-                    if (stringSize ==256)
+                    if (stringSize == 256)
                         return SIMCONNECT_DATATYPE.STRING256;
                     if (stringSize == 260)
                         return SIMCONNECT_DATATYPE.STRING260;

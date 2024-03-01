@@ -5,10 +5,11 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+
 using CommandLine;
 using CommandLine.Text;
 
-namespace CTrue.FsConnect.FsEnumGenerator
+namespace FsEnumGenerator
 {
     class Program
     {
@@ -59,10 +60,10 @@ namespace CTrue.FsConnect.FsEnumGenerator
             {
                 string[] splits = eventLine.Split('\t');
 
-                if(splits.Length != 4) continue;
-                if(splits[0] == "Event ID") continue;
-                if(splits[1] == "Unsupported") continue;
-                if(splits[1] == "Not supported") continue;
+                if (splits.Length != 4) continue;
+                if (splits[0] == "Event ID") continue;
+                if (splits[1] == "Unsupported") continue;
+                if (splits[1] == "Not supported") continue;
 
                 string[] nameSplit = splits[0].Split(' ');
 
@@ -76,7 +77,7 @@ namespace CTrue.FsConnect.FsEnumGenerator
                 else
                     name = splits[1];
 
-                name = name.Trim(new[] {','});
+                name = name.Trim(new[] { ',' });
 
                 // Remove names starting with KEY_ with seems to be the old FSX event names
                 if (name.StartsWith("key_", StringComparison.InvariantCultureIgnoreCase))
@@ -103,8 +104,8 @@ namespace CTrue.FsConnect.FsEnumGenerator
 
         private static void GenerateFsEnumsFile(List<FsEventInfo> fsEventList, string fileName)
         {
-            System.IO.StringWriter baseTextWriter = new System.IO.StringWriter();
-            System.CodeDom.Compiler.IndentedTextWriter indentWriter = new IndentedTextWriter(baseTextWriter, "    ");
+            StringWriter baseTextWriter = new StringWriter();
+            IndentedTextWriter indentWriter = new IndentedTextWriter(baseTextWriter, "    ");
 
             // Sets the indentation level.
             indentWriter.Indent = 0;
