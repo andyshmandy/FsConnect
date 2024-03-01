@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 using CTrue.FsConnect;
+using FFB_SimConnect;
 using Microsoft.FlightSimulator.SimConnect;
 
 namespace FsConnectTest
@@ -15,24 +17,41 @@ namespace FsConnectTest
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1)]
     public struct PlaneInfoResponse
     {
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
-        public String Title;
-        [SimVar(UnitId = FsUnit.Degree)]
-        public double PlaneLatitude;
-        [SimVar(UnitId = FsUnit.Degree)]
-        public double PlaneLongitude;
-        [SimVar(UnitId = FsUnit.Feet)]
-        public double PlaneAltitude;
-        [SimVar(UnitId = FsUnit.Degree)]
-        public double PlaneHeadingDegreesTrue;
-        [SimVar(NameId = FsSimVar.AirspeedTrue, UnitId = FsUnit.MeterPerSecond)]
-        public double AirspeedTrueInMeterPerSecond;
-        [SimVar(NameId = FsSimVar.AirspeedTrue, UnitId = FsUnit.Knot)]
-        public double AirspeedTrueInKnot;
+        //[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
+        //public String Title;
+
+        //[SimVar(UnitId = FsUnit.Radians)]
+        //public UInt16 AileronAverageDeflection;
+
+        //[SimVar(UnitId = FsUnit.Position16k)]
+        //public double AileronPosition;
+
+        [SimVar(UnitId = FsUnit.Radians)]
+        public double ElevatorDeflection;
+
+        [SimVar(UnitId = FsUnit.Position16k)]
+        public double ElevatorPosition;
+
+        [SimVar(UnitId = FsUnit.Knots)]
+        public double IndicatedAirspeed;
+
+    }
+
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1)]
+    public struct ElevatorSet
+    {
+        [SimVar(UnitId = FsUnit.Position16k)]
+        public double ElevatorPosition;
     }
 
     public class FsConnectTestConsole
     {
+        public double airSpeed;
+        public FsConnectTestConsole() 
+        {
+            this.airSpeed = 0;
+        }   
+
         public static void Main(string[] args)
         {
             string hostName = "localhost";
@@ -61,14 +80,22 @@ namespace FsConnectTest
             fsConnect.FsDataReceived += HandleReceivedFsData;
 
             int planeInfoDefinitionId = fsConnect.RegisterDataDefinition<PlaneInfoResponse>();
+            int elevatorDefId = fsConnect.RegisterDataDefinition<ElevatorSet>();
 
+            //fsConnect.UpdateData(elevatorDefId, elevPosition, 0);
+            var odConnector = new OdescConnector();
             ConsoleKeyInfo cki;
 
-            do
+            while(true)
             {
-                fsConnect.RequestData((int)Requests.PlaneInfoRequest, planeInfoDefinitionId);
-                cki = Console.ReadKey();
-            } while (cki.Key != ConsoleKey.Escape);
+                fsConnect.RequestData((int)Requests.PlaneInfoRequest, planeInfoDefinitionId);;
+                
+                odConnector.SendPositionData(.1);
+                double elevatorPosition = odConnector.GetElevatorAxisPosition();
+                fsConnect.UpdateData(elevatorDefId, elevatorPosition * -100000);
+                Thread.Sleep(10);
+                //cki = Console.ReadKey();
+            } //while (cki.Key != ConsoleKey.Escape || true);
 
             fsConnect.Disconnect();
         }
@@ -79,8 +106,11 @@ namespace FsConnectTest
 
             if (e.RequestId == (uint)Requests.PlaneInfoRequest)
             {
+                
+
                 PlaneInfoResponse r = (PlaneInfoResponse)e.Data.FirstOrDefault();
-                Console.WriteLine($"{r.PlaneLatitude:F4} {r.PlaneLongitude:F4} {r.PlaneAltitude:F1}ft {r.PlaneHeadingDegreesTrue:F1}deg {r.AirspeedTrueInMeterPerSecond:F0}m/s {r.AirspeedTrueInKnot:F0}kt");
+                Console.WriteLine($"IndicatedAirspeed: {r.IndicatedAirspeed} ElevatorDeflection: {r.ElevatorDeflection} ElevatorPosition: {r.ElevatorPosition}");
+                //Console.WriteLine($"AileronPosition: {r.AileronPosition}  ElevatorPosition: {r.ElevatorPosition}");
             }
         }
     }

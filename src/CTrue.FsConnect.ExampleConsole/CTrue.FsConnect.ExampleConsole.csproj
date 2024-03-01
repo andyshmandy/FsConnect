@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -21,6 +21,7 @@
     <Reference Include="Microsoft.FlightSimulator.SimConnect">
       <HintPath>..\Dependencies\SimConnect\lib\net40\Microsoft.FlightSimulator.SimConnect.dll</HintPath>
     </Reference>
+    <Reference Include="System.Management" />
   </ItemGroup>
 
   <ItemGroup>
