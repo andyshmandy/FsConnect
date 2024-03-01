@@ -22,7 +22,7 @@ namespace FsConnect
         public double ElevatorPosition;
 
         [SimVar(UnitId = FsUnit.Knots)]
-        public double IndicatedAirspeed;
+        public double AirspeedIndicated;
 
     }
 

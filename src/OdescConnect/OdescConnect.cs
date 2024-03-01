@@ -35,7 +35,13 @@ namespace OdescConnect
             {
                 var response = (PlaneInfoResponse)e.Data.FirstOrDefault();
 
-                this.SendMotorControlInfo(response.IndicatedAirspeed);
+                double airSpeed = response.ElevatorDeflection / (response.AirspeedIndicated);
+                //Console.WriteLine($"airspeedFactor = {airSpeed}");
+                //this.SendMotorControlInfo(airSpeed);
+
+
+                PlaneInfoResponse r = (PlaneInfoResponse)e.Data.FirstOrDefault();
+                Console.WriteLine($"IndicatedAirspeed: {r.AirspeedIndicated} ElevatorDeflection: {r.ElevatorDeflection} speedFactor: {airSpeed}");
             }
         }
 
@@ -60,8 +66,9 @@ namespace OdescConnect
             //string speed = "4";
             //string torque = "7";
             //this.serialPort.WriteLine($"p {motor} {position} {speed} {torque}");
-
-            serialPort.WriteLine($"q 0 0 0 {position}");
+            string command = $"p 0 0 0 {position}";
+            //Console.WriteLine(command);
+            serialPort.WriteLine(command);
         }
 
         public static void GetOdrivePort()

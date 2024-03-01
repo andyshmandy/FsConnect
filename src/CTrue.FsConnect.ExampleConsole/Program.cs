@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using FsConnect.Events;
 
 namespace FsConnect.ExampleConsole
@@ -41,15 +42,15 @@ namespace FsConnect.ExampleConsole
             
             ConsoleKeyInfo cki;
 
-            do
+            while (true)
             {
                 fsConnect.RequestData((int)Requests.PlaneInfoRequest, planeInfoDefinitionId); ;
 
                 double elevatorPosition = odConnect.GetElevatorAxisPosition();
                 fsConnect.UpdateData(elevatorDefId, elevatorPosition * -100000);
-
-                cki = Console.ReadKey();
-            } while (cki.Key != ConsoleKey.Escape || true);
+                Thread.Sleep(50);
+                //cki = Console.ReadKey();
+            } //while (cki.Key != ConsoleKey.Escape || true);
 
             fsConnect.Disconnect();
         }
@@ -60,8 +61,7 @@ namespace FsConnect.ExampleConsole
 
             if (e.RequestId == (uint)Requests.PlaneInfoRequest)
             {
-                PlaneInfoResponse r = (PlaneInfoResponse)e.Data.FirstOrDefault();
-                Console.WriteLine($"IndicatedAirspeed: {r.IndicatedAirspeed} ElevatorDeflection: {r.ElevatorDeflection} ElevatorPosition: {r.ElevatorPosition}");
+                
             }
         }
     }
